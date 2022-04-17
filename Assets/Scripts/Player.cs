@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Slider healthBar;
     [SerializeField] private int maxHealth;
     private int health;
     [SerializeField] private float damageCooldown;
@@ -13,6 +15,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletLifetime;
 
     [SerializeField] private GameObject face;
     [SerializeField] private Sprite neutralFace;
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        healthBar.value = 1;
     }
 
     void Update()
@@ -42,7 +46,11 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Fire1") && shootTimer <= 0) {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             var b = bullet.GetComponent<Bullet>();
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+            float ySign = (mousePos.y < transform.position.y) ? -1f : 1f;
+            b.rotation = Vector2.Angle(Vector2.right, mousePos - transform.position) * ySign;
             b.speed = bulletSpeed;
+            b.Lifetime(bulletLifetime);
             shootTimer = shootCooldown;
         } else {
             shootTimer -= Time.deltaTime;
@@ -52,7 +60,9 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Bullet" && damageTimer <= 0) {
             health -= 1;
+            healthBar.value = (float)health / (float)maxHealth;
             damageTimer = damageCooldown;
+            Destroy(collision.gameObject);
         }
     }
 }

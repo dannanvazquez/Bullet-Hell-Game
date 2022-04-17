@@ -23,4 +23,8 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Lifetime(float timeTillDestroy) {
+        Destroy(gameObject, timeTillDestroy);
+    }
 }

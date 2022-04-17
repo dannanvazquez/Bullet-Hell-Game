@@ -12,6 +12,7 @@ public class BulletSpawner : MonoBehaviour
 
     [SerializeField] private float cooldown;
     private float timer;
+    [SerializeField] private float bulletLifetime;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private Vector2 bulletVelocity;
 
@@ -59,11 +60,12 @@ public class BulletSpawner : MonoBehaviour
 
         GameObject[] spawnedBullets = new GameObject[numOfBullets];
         for (int i = 0; i < numOfBullets; i++) {
-            spawnedBullets[i] = Instantiate(bulletPrefab, transform);
+            spawnedBullets[i] = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             var b = spawnedBullets[i].GetComponent<Bullet>();
             b.rotation = rotations[i];
             b.speed = bulletSpeed;
             b.velocity = bulletVelocity;
+            b.Lifetime(bulletLifetime);
         }
         return spawnedBullets;
     }
