@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6049843675466046372}
   - component: {fileID: 6049843675466046373}
   - component: {fileID: 6049843675466046375}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -131,11 +131,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63850829515fcc94ba77bc6797b8ff21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  healthBar: {fileID: 0}
+  maxHealth: 10
   damageCooldown: 0.3
   shootCooldown: 0.2
   bulletPrefab: {fileID: 623309478844292270, guid: 9a112b029a0caf746acac4a060744865, type: 3}
   bulletSpeed: 10
+  bulletLifetime: 5
   face: {fileID: 6049843673753949024}
   neutralFace: {fileID: -7681462535935826448, guid: b2575b0eb9cb4054a8a5d907bf0a55a6, type: 3}
   hurtFace: {fileID: 6761968971201214084, guid: b2575b0eb9cb4054a8a5d907bf0a55a6, type: 3}

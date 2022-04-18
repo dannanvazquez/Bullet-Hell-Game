@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private GameObject walkableArea;
 
-    void Update()
+    private void Update()
     {
         transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * speed * Time.deltaTime;
         float widthArea = walkableArea.GetComponent<SpriteRenderer>().bounds.size.x;

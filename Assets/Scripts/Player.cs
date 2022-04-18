@@ -23,13 +23,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite deathFace;
     [SerializeField] private Sprite confusedFace;
 
-    void Start()
+    private void Start()
     {
         health = maxHealth;
         healthBar.value = 1;
     }
 
-    void Update()
+    private void Update()
     {
         if (health <= 0) {
             face.GetComponent<SpriteRenderer>().sprite = deathFace;
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
             float ySign = (mousePos.y < transform.position.y) ? -1f : 1f;
             b.rotation = Vector2.Angle(Vector2.right, mousePos - transform.position) * ySign;
             b.speed = bulletSpeed;
-            b.Lifetime(bulletLifetime);
+            Destroy(bullet, bulletLifetime);
             shootTimer = shootCooldown;
         } else {
             shootTimer -= Time.deltaTime;

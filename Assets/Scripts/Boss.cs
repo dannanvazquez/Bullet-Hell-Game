@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
+    public string bossName;
     [SerializeField] private Slider healthBar;
     [SerializeField] private int maxHealth;
-    private int health;
+    public int health;
 
     void Start() {
+        healthBar = GameObject.Find("/Canvas/BossBar/Health").GetComponent<Slider>();
         health = maxHealth;
         healthBar.value = 1;
     }
@@ -25,7 +27,6 @@ public class Boss : MonoBehaviour
         if (collision.tag == "PlayerBullet") {
             health -= 1;
             healthBar.value = (float)health / (float)maxHealth;
-            Destroy(collision.gameObject);
         }
     }
 }
