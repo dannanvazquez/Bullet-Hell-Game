@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 623309478844292270, guid: 132dbefd5fabff541bf3207375e30e41, type: 3}
-  minRotation: 1
+  minRotation: 0
   maxRotation: 360
   numOfBullets: 16
-  isRandom: 0
   rotateSpeed: 50
   bulletSpeed: 5
   bulletVelocity: {x: 1, y: 0}
-  timer: 10
+  cooldown: 1
+  pulseAmount: 1
+  lifetimeCooldown: 5

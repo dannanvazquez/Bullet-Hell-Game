@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JerryManager : MonoBehaviour
+public class JerryController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private GameObject walkableArea;
     private Vector3 targetLocation;
     [SerializeField] private GameObject spawnerPrefab;
 
-    [Header("Ability")]
+    [Header("Ability 1")]
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private float _minRotation, _maxRotation;
     [SerializeField] private int _numOfBullets;
-    [SerializeField] private bool _isRandom;
     [SerializeField] private float _rotateSpeed;
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private Vector2 _bulletVelocity;
@@ -41,7 +40,6 @@ public class JerryManager : MonoBehaviour
             bs.minRotation = _minRotation;
             bs.maxRotation = _maxRotation;
             bs.numOfBullets = _numOfBullets;
-            bs.isRandom = _isRandom;
             bs.rotateSpeed = _rotateSpeed;
             bs.bulletSpeed = _bulletSpeed;
             bs.bulletVelocity = _bulletVelocity;

@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 6049843675466046375}
   m_Layer: 6
   m_Name: JerryTheSlime
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,6 +135,9 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   maxHealth: 50
   health: 0
+  animatedObject: {fileID: 6049843673753949024}
+  neutralAnimation: {fileID: -7681462535935826448, guid: b2575b0eb9cb4054a8a5d907bf0a55a6, type: 3}
+  hurtAnimation: {fileID: 6761968971201214084, guid: b2575b0eb9cb4054a8a5d907bf0a55a6, type: 3}
 --- !u!114 &8089299744646606349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +157,6 @@ MonoBehaviour:
   _minRotation: 0
   _maxRotation: 360
   _numOfBullets: 16
-  _isRandom: 0
   _rotateSpeed: 0
   _bulletSpeed: 5
   _bulletVelocity: {x: 1, y: 0}
@@ -234,7 +236,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &6049843675466046373
 Rigidbody2D:

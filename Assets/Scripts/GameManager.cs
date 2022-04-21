@@ -7,14 +7,17 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private float spawnCooldown;
     private float spawnTimer;
-    private int stage = 0;
+    [SerializeField] private int stage;
     private GameObject currentBoss = null;
+    [SerializeField] private Vector3 spawnPos;
 
+    [SerializeField] private GameObject player;
     [SerializeField] private GameObject bossBar;
     [SerializeField] private Text bossNameText;
     [SerializeField] private Slider bossHealthSlider;
     [SerializeField] private GameObject countdown;
     [SerializeField] private GameObject jerryBoss;
+    [SerializeField] private GameObject ashBoss;
 
     private void Start() {
         spawnTimer = spawnCooldown;
@@ -25,9 +28,16 @@ public class GameManager : MonoBehaviour
     private void Update() {
         if (currentBoss == null) {
             if (spawnTimer <= 0) {
+                player.GetComponent<Player>().FullHeal();
                 if (stage == 0) {
                     countdown.SetActive(false);
-                    currentBoss = Instantiate(jerryBoss, Vector3.zero, Quaternion.identity);
+                    currentBoss = Instantiate(jerryBoss, spawnPos, Quaternion.identity);
+                    bossNameText.text = currentBoss.GetComponent<Boss>().bossName;
+                    bossHealthSlider.value = currentBoss.GetComponent<Boss>().health;
+                    bossBar.SetActive(true);
+                } else if (stage == 1) {
+                    countdown.SetActive(false);
+                    currentBoss = Instantiate(ashBoss, spawnPos, Quaternion.identity);
                     bossNameText.text = currentBoss.GetComponent<Boss>().bossName;
                     bossHealthSlider.value = currentBoss.GetComponent<Boss>().health;
                     bossBar.SetActive(true);

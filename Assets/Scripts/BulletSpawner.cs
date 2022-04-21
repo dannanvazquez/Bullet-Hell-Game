@@ -4,46 +4,48 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-    [HideInInspector] public GameObject bulletPrefab;
-    [HideInInspector] public float minRotation, maxRotation;
-    [HideInInspector] public int numOfBullets;
-    [HideInInspector] public bool isRandom;
-    [HideInInspector] public float rotateSpeed;
-    [HideInInspector] public float bulletSpeed;
-    [HideInInspector] public Vector2 bulletVelocity;
+    public GameObject bulletPrefab;
+    public float minRotation, maxRotation;
+     public int numOfBullets;
+     public float rotateSpeed;
+     public float bulletSpeed;
+     public Vector2 bulletVelocity;
 
-    [SerializeField] private float timer;
+    public float cooldown;
+    private float timer;
+    public int pulseAmount;
+
+    public float lifetimeCooldown;
+    private float lifetimeTimer;
 
     private float[] rotations;
 
     private void Start() {
+        timer = cooldown;
+        lifetimeTimer = lifetimeCooldown;
         rotations = new float[numOfBullets];
-        if (!isRandom) {
-            DistributedRotations();
-        } else {
-            RandomRotations();
-        }
+        DistributedRotations();
         SpawnBullets();
     }
 
     private void Update() {
         transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
-        if (timer <= 0) {
+        if (timer <= 0 && pulseAmount > 0) {
+            SpawnBullets();
+        }
+        if (pulseAmount <= 0) {
+            lifetimeTimer -= Time.deltaTime;
+        }
+        if (lifetimeTimer <= 0) {
             Destroy(gameObject);
         }
-        timer -= Time.deltaTime;
-    }
 
-    private float[] RandomRotations() {
-        for (int i = 0; i < numOfBullets; i++) {
-            rotations[i] = Random.Range(minRotation, maxRotation);
-        }
-        return rotations;
+        timer -= Time.deltaTime;
     }
 
     private float[] DistributedRotations() {
         for (int i = 0; i < numOfBullets; i++) {
-            var fraction = (float)i / ((float)numOfBullets);
+            var fraction = ((float)i + minRotation) / ((float)numOfBullets);
             var difference = maxRotation - minRotation;
             var fractionOfDifference = fraction * difference;
             rotations[i] = fractionOfDifference;
@@ -52,10 +54,8 @@ public class BulletSpawner : MonoBehaviour
     }
 
     private GameObject[] SpawnBullets() {
-        if(isRandom) {
-            RandomRotations();
-        }
-
+        pulseAmount--;
+        timer = cooldown;
         GameObject[] spawnedBullets = new GameObject[numOfBullets];
         for (int i = 0; i < numOfBullets; i++) {
             spawnedBullets[i] = Instantiate(bulletPrefab, transform);

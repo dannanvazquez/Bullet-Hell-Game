@@ -65,4 +65,9 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    public void FullHeal() {
+        health = maxHealth;
+        healthBar.value = 1;
+    }
 }

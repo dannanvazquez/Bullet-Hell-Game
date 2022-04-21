@@ -400,11 +400,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCooldown: 5
+  stage: 0
+  spawnPos: {x: 0, y: 2, z: 0}
+  player: {fileID: 1398733263}
   bossBar: {fileID: 1965713209}
   bossNameText: {fileID: 299323617}
   bossHealthSlider: {fileID: 159560420}
   countdown: {fileID: 1124701825}
   jerryBoss: {fileID: 6049843675466046382, guid: 67aefa6d96e58a54fb75f52fc6af35ec, type: 3}
+  ashBoss: {fileID: 3338572407594242999, guid: 08081fb4cd38ddb4bac65a83fce70568, type: 3}
 --- !u!4 &180750455
 Transform:
   m_ObjectHideFlags: 0
@@ -413,7 +417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180750453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6256777, y: 2.578704, z: -14.083445}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1043,6 +1047,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319782653}
   m_CullTransparentMesh: 1
+--- !u!1 &1398733263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6049843675466046382, guid: 5e083cd91c6f5d8468934ba17627429c, type: 3}
+  m_PrefabInstance: {fileID: 6049843673973731065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1432315151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,7 +1640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6049843675466046370, guid: 5e083cd91c6f5d8468934ba17627429c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 6049843675466046370, guid: 5e083cd91c6f5d8468934ba17627429c, type: 3}
       propertyPath: m_LocalPosition.z
