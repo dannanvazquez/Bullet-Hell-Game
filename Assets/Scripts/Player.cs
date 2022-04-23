@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
     [SerializeField] private int maxHealth;
-    private int health;
+    [HideInInspector] public int health;
     [SerializeField] private float damageCooldown;
     private float damageTimer;
     [SerializeField] private float shootCooldown;

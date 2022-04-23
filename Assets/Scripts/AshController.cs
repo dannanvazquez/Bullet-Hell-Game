@@ -28,6 +28,7 @@ public class AshController : MonoBehaviour
     [HideInInspector] public bool isForcefield;
     private bool isActiveAbility2 = false;
     private bool isRotate;
+    [SerializeField] private AudioClip rainClip;
 
     private void Start() {
         ability1Timer = ability1Cooldown;
@@ -42,7 +43,7 @@ public class AshController : MonoBehaviour
         }
         if (ability2Timer <= 0 && isActiveAbility2 == false) {
             isActiveAbility2 = true;
-            if (Random.Range(0,2) == 3) {
+            if (Random.value < 0.5f) {
                 StartCoroutine(LeftSpawnRain());
             } else {
                 StartCoroutine(RightSpawnRain());
@@ -74,6 +75,11 @@ public class AshController : MonoBehaviour
     }
 
     IEnumerator LeftSpawnRain() {
+        AudioSource ASRain = gameObject.AddComponent<AudioSource>();
+        ASRain.clip = rainClip;
+        ASRain.loop = true;
+        ASRain.volume = 0.5f;
+        ASRain.Play();
         for (int i = 0; i < 8; i++) {
             var s = Instantiate(spawnerPrefab, new Vector3(-15 + (i * 3), 6, 0), Quaternion.identity);
             var bs = s.GetComponent<BulletSpawner>();
@@ -83,7 +89,7 @@ public class AshController : MonoBehaviour
             bs.rotateSpeed = 0;
             bs.numOfBullets = 1;
             bs.cooldown = 1f;
-            bs.pulseAmount = 20;
+            bs.pulseAmount = 15;
             bs.bulletSpeed = 8;
         }
         yield return new WaitForSeconds(0.5f);
@@ -96,13 +102,20 @@ public class AshController : MonoBehaviour
             bs.rotateSpeed = 0;
             bs.numOfBullets = 1;
             bs.cooldown = 1f;
-            bs.pulseAmount = 20;
+            bs.pulseAmount = 15;
             bs.bulletSpeed = 8;
         }
+        yield return new WaitForSeconds(15f);
+        Destroy(ASRain);
         yield return null;
     }
 
     IEnumerator RightSpawnRain() {
+        AudioSource ASRain = gameObject.AddComponent<AudioSource>();
+        ASRain.clip = rainClip;
+        ASRain.loop = true;
+        ASRain.volume = 0.5f;
+        ASRain.Play();
         for (int i = 0; i < 8; i++) {
             var s = Instantiate(spawnerPrefab, new Vector3(15 - (i * 3), 6, 0), Quaternion.identity);
             var bs = s.GetComponent<BulletSpawner>();
@@ -112,7 +125,7 @@ public class AshController : MonoBehaviour
             bs.rotateSpeed = 0;
             bs.numOfBullets = 1;
             bs.cooldown = 1f;
-            bs.pulseAmount = 20;
+            bs.pulseAmount = 15;
             bs.bulletSpeed = 8;
         }
         yield return new WaitForSeconds(.5f);
@@ -125,9 +138,11 @@ public class AshController : MonoBehaviour
             bs.rotateSpeed = 0;
             bs.numOfBullets = 1;
             bs.cooldown = 1f;
-            bs.pulseAmount = 20;
+            bs.pulseAmount = 15;
             bs.bulletSpeed = 8;
         }
+        yield return new WaitForSeconds(15f);
+        Destroy(ASRain);
         yield return null;
     }
 
@@ -145,7 +160,6 @@ public class AshController : MonoBehaviour
         leftFlower.GetComponent<FlowerController>().enabled = true;
         rightFlower.transform.Find("FlowerPattern").gameObject.SetActive(true);
         rightFlower.GetComponent<FlowerController>().enabled = true;
-        //rightFlower.transform.Find("FlowerPattern").gameObject.GetComponent<FlowerPatternSpawner>().rotateSpeed *= -1;
         yield return new WaitForSeconds(30f);
         int heal = 0;
         if (leftFlower != null) {
