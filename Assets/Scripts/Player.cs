@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private float damageTimer;
     [SerializeField] private float shootCooldown;
     private float shootTimer;
+    [SerializeField] private AudioClip damageClip;
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
@@ -59,6 +60,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Bullet" && damageTimer <= 0) {
+            AudioSource ASHit = gameObject.AddComponent<AudioSource>();
+            ASHit.clip = damageClip;
+            ASHit.volume = 0.5f;
+            ASHit.Play();
             health -= 1;
             healthBar.value = (float)health / (float)maxHealth;
             damageTimer = damageCooldown;

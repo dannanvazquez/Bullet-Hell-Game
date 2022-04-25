@@ -44,11 +44,11 @@ public class BulletSpawner : MonoBehaviour
     }
 
     private float[] DistributedRotations() {
+        float anglestep = (maxRotation - minRotation) / (float)numOfBullets;
+        float angle = minRotation;
         for (int i = 0; i < numOfBullets; i++) {
-            var fraction = ((float)i + minRotation) / ((float)numOfBullets);
-            var difference = maxRotation - minRotation;
-            var fractionOfDifference = fraction * difference;
-            rotations[i] = fractionOfDifference;
+            rotations[i] = angle;
+            angle += anglestep;
         }
         return rotations;
     }

@@ -479,8 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d22fa0349880145aa1eb112f3e276c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossStage: -1
   spawnCooldown: 3
-  stage: 0
   spawnPos: {x: 0, y: 2, z: 0}
   countdownClip: {fileID: 8300000, guid: 37fec828ddb2047618805801cdf7afd7, type: 3}
   deathPanel: {fileID: 460171145}
@@ -491,6 +491,7 @@ MonoBehaviour:
   countdown: {fileID: 1124701825}
   jerryBoss: {fileID: 6049843675466046382, guid: 67aefa6d96e58a54fb75f52fc6af35ec, type: 3}
   ashBoss: {fileID: 3338572407594242999, guid: 08081fb4cd38ddb4bac65a83fce70568, type: 3}
+  ombreBoss: {fileID: 9049917536438629305, guid: c4211add95f914b48a8048b412c87575, type: 3}
 --- !u!4 &180750455
 Transform:
   m_ObjectHideFlags: 0
@@ -2359,6 +2360,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1432315153}
+    - target: {fileID: 6049843675466046371, guid: 5e083cd91c6f5d8468934ba17627429c, type: 3}
+      propertyPath: damageClip
+      value: 
+      objectReference: {fileID: 8300000, guid: aa8e351f6dc0ee047a7016d0864bd9d0, type: 3}
     - target: {fileID: 6049843675466046382, guid: 5e083cd91c6f5d8468934ba17627429c, type: 3}
       propertyPath: m_Name
       value: Player

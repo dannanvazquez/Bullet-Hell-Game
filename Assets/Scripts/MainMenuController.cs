@@ -9,7 +9,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject continueMenu;
 
     public void StartGame() {
-        if (PlayerPrefs.GetInt("bossStage",0) > 0) {
+        if (PlayerPrefs.GetFloat("playTime",0) > 0) {
             mainMenu.SetActive(false);
             continueMenu.SetActive(true);
         } else {
@@ -23,6 +23,8 @@ public class MainMenuController : MonoBehaviour
 
     public void NewGame() {
         PlayerPrefs.SetInt("bossStage", 0);
+        PlayerPrefs.SetInt("playTime", 0);
+        PlayerPrefs.SetInt("deathCount", 0);
         LoadScene("Game");
     }
 

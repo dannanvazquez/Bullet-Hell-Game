@@ -55,8 +55,8 @@ public class AshController : MonoBehaviour
             var bs = s.GetComponent<BulletSpawner>();
             bs.bulletPrefab = _bulletPrefab;
             if (isRotate) {
-                bs.minRotation = _minRotation + 22.5f;
-                bs.maxRotation = _maxRotation + 22.5f;
+                bs.minRotation = _minRotation + 11.25f;
+                bs.maxRotation = _maxRotation + 11.25f;
                 isRotate = false;
             } else {
                 bs.minRotation = _minRotation;

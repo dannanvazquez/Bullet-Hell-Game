@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private int bossStage = -1; //Forces a boss stage when played, set to -1 otherwise
     [SerializeField] private int spawnCooldown;
     private GameObject currentBoss = null;
     [SerializeField] private Vector3 spawnPos;
@@ -19,19 +20,31 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject countdown;
     [SerializeField] private GameObject jerryBoss;
     [SerializeField] private GameObject ashBoss;
+    [SerializeField] private GameObject ombreBoss;
 
     private void Awake() {
+        if (bossStage != -1) {
+            PlayerPrefs.SetInt("bossStage", bossStage);
+        }
         StartCoroutine(ActivateCountdown());
     }
 
     private void Update() {
+        PlayerPrefs.SetFloat("playTime", PlayerPrefs.GetFloat("playTime", 0) + Time.deltaTime);
         if (player.GetComponent<Player>().health <= 0) {
+            PlayerPrefs.SetInt("deathCount", PlayerPrefs.GetInt("deathCount", 0) + 1);
             deathPanel.SetActive(true);
         }
         if (currentBoss != null) {
             if(currentBoss.GetComponent<Boss>().health <= 0) {
-                PlayerPrefs.SetInt("bossStage", PlayerPrefs.GetInt("bossStage", 0) + 1);
-                LoadScene("Game");
+                if (PlayerPrefs.GetInt("bossStage", 0) == 2) {
+                    print("Sending to end!");
+                    LoadScene("EndScreen");
+                }
+                else {
+                    PlayerPrefs.SetInt("bossStage", PlayerPrefs.GetInt("bossStage", 0) + 1);
+                    LoadScene("Game");
+                }
             }
         }
     }
@@ -56,16 +69,16 @@ public class GameManager : MonoBehaviour
     private void SpawnBoss() {
         if (PlayerPrefs.GetInt("bossStage", 0) == 0) {
             currentBoss = Instantiate(jerryBoss, spawnPos, Quaternion.identity);
-            bossNameText.text = currentBoss.GetComponent<Boss>().bossName;
-            bossHealthSlider.value = currentBoss.GetComponent<Boss>().health;
-            bossBar.SetActive(true);
         }
         else if (PlayerPrefs.GetInt("bossStage", 0) == 1) {
             currentBoss = Instantiate(ashBoss, spawnPos, Quaternion.identity);
-            bossNameText.text = currentBoss.GetComponent<Boss>().bossName;
-            bossHealthSlider.value = currentBoss.GetComponent<Boss>().health;
-            bossBar.SetActive(true);
         }
+        else if (PlayerPrefs.GetInt("bossStage", 0) == 2) {
+            currentBoss = Instantiate(ombreBoss, spawnPos, Quaternion.identity);
+        }
+        bossNameText.text = currentBoss.GetComponent<Boss>().bossName;
+        bossHealthSlider.value = currentBoss.GetComponent<Boss>().health;
+        bossBar.SetActive(true);
     }
 
     public void LoadScene(string sceneName) {
