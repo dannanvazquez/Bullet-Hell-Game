@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         if (player.GetComponent<Player>().health <= 0) {
             PlayerPrefs.SetInt("deathCount", PlayerPrefs.GetInt("deathCount", 0) + 1);
             deathPanel.SetActive(true);
+            Cursor.visible = true;
         }
         if (currentBoss != null) {
             if(currentBoss.GetComponent<Boss>().health <= 0) {
@@ -83,5 +84,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string sceneName) {
         SceneManager.LoadScene(sceneName);
+        if (sceneName == "Game") Cursor.visible = false;
     }
 }
