@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossName: Ombre the Ghost
   healthBar: {fileID: 0}
-  maxHealth: 200
+  maxHealth: 150
   health: 0
   animatedObject: {fileID: 6764803493659560514}
   neutralAnimation: {fileID: 406862476118555702, guid: 6e199d4707039a2459a2e480666c4336, type: 3}

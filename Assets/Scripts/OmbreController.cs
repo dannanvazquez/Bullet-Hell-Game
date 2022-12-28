@@ -23,22 +23,31 @@ public class OmbreController : MonoBehaviour
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private Vector2 _bulletVelocity;
 
+    private bool isLeft;
+
     private void Start() {
+        isLeft = (Random.Range(0, 2) == 0) ? true : false;
         ability1Timer = minTeleportTime;
         StartCoroutine(PlayMusic());
     }
 
     private void Update() {
         if (ability1Timer <= 0) {
-            int randomLoc = Random.Range(0, 4);
-            if (randomLoc == 0) {
-                transform.position = locationA;
-            } else if (randomLoc == 1) {
-                transform.position = locationB;
-            } else if (randomLoc == 2) {
-                transform.position = locationC;
-            } else if (randomLoc == 3) {
-                transform.position = locationD;
+            int randomLoc = Random.Range(0, 2);
+            if (isLeft) {
+                if (randomLoc == 0) {
+                    transform.position = locationA;
+                } else {
+                    transform.position = locationC;
+                }
+                isLeft = false;
+            } else {
+                if (randomLoc == 0) {
+                    transform.position = locationB;
+                } else {
+                    transform.position = locationD;
+                }
+                isLeft = true;
             }
             int randomSpawnTime = Random.Range((int)minTeleportTime, (int)maxTeleportTime);
             ability1Timer = randomSpawnTime;
